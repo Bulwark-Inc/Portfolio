@@ -1,0 +1,16 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
+{% endblock %}
+{% block content %}
+<section class="hero text-center py-20">
+    <h1 data-aos="fade-up" class="text-4xl font-bold">Hello, I’m Nonye Shiloh</h1>
+    <p data-aos="fade-up" data-aos-delay="200" class="mt-4 text-lg">I build scalable Django web apps.</p>
+    <img data-aos="zoom-in" data-aos-delay="400" src="{% static 'home/images/profile.png' %}" alt="Profile Picture" class="mx-auto w-40 rounded-full mt-8">
+    <div class="mt-6 space-x-4">
+        <a href="https://github.com/Bulwark-Inc" class="btn btn-primary">GitHub</a>
+        <a href="https://linkedin.com/in/shiloh-egwuatu" class="btn btn-secondary">LinkedIn</a>
+    </div>
+{% endblock %}

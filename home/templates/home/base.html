@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="{% static 'css/dist/output.css' %}">
+    <link rel="stylesheet" href="{% static 'home/style.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/aos.css' %}">
+    {% block styles %}
+    {% endblock %}
+</head>
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+    <header class="p-4 bg-white shadow-md">
+        <nav class="flex justify-between dark:text-gray-900">
+            <h1 class="text-xl font-bold"><a href="{% url 'home' %}">MyPortfolio</a></h1>
+            <ul class="flex space-x-4">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'projects' %}">Projects</a></li>
+                <li><a href="{% url 'services' %}">Services</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+            <button id="darkToggleBtn" onclick="toggleDarkMode()" class="px-4 py-2 rounded bg-blue-500 text-white dark:bg-yellow-500 dark:text-black">
+                🌙 Enable Dark Mode
+            </button>
+        </nav>
+    </header>
+    
+    <main class="container mx-auto p-4">
+        {% block content %}
+        {% endblock %}
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300 ease-in-out">
+            Hire Me
+        </button>             
+    </main>
+
+    <footer class="p-4 text-center">
+        <p>&copy; {{ year }} MyPortfolio. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        function toggleDarkMode() {
+          const htmlElement = document.documentElement;
+          htmlElement.classList.toggle('dark');
+      
+          const btn = document.getElementById('darkToggleBtn');
+          if (htmlElement.classList.contains('dark')) {
+            btn.innerHTML = '☀️ Disable Dark Mode';
+          } else {
+            btn.innerHTML = '🌙 Enable Dark Mode';
+          }
+        }
+    </script>
+    <script src="{% static 'home/js/aos.js' %}"></script>
+    <script>
+        AOS.init({
+          duration: 800, // Animation duration in ms
+          once: true,     // Whether animation should happen only once
+          easing: 'ease-in-out', // Easing option
+        });
+    </script>
+      
+</body>
+</html>

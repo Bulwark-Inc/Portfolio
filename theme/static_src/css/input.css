@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light mode (default) */
+body {
+  @apply bg-white text-black transition-colors duration-500;
+}
+
+/* Dark mode (when <html> has the 'dark' class) */
+html.dark body {
+  @apply bg-black text-white;
+}
+
+html.dark body nav {
+  @apply bg-black text-black;
+}
