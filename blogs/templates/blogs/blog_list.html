@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'blogs/css/blog_list.css' %}">
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'blogs/js/blog_list.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<!-- Blog Section -->
+<section class="blog-section">
+  <h2 class="section-title text-3xl font-bold mb-6 text-gray-800 dark:text-gray-100">Our Latest Blogs</h2>
+
+    <!-- Search Bar -->
+    <div class="mb-12 flex justify-center">
+      <form method="get" action="{% url 'blogs' %}" class="search-form">
+        <input
+          type="text"
+          name="q"
+          value="{{ query|default:'' }}"
+          placeholder="Search blogs..."
+          class="search-input"
+        />
+        <button type="submit" class="search-button">
+          <svg class="icon-search" viewBox="0 0 24 24">
+            <path d="M21 21l-4.35-4.35M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z" />
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- Filter by Category -->
+    <div class="mb-8 flex justify-center">
+      <form method="get" action="{% url 'blogs' %}" class="filter-form">
+        <!-- Category Dropdown -->
+        <div class="category-dropdown-wrapper">
+          <select name="category" onchange="this.form.submit()" class="category-select">
+            <option value="">All Categories</option>
+            {% for cat in categories %}
+              <option value="{{ cat }}" {% if cat == category %}selected{% endif %}>{{ cat }}</option>
+            {% endfor %}
+          </select>
+    </div>        
+        
+        <!-- Submit Button -->
+        <button type="submit" class="filter-btn">
+          Filter
+        </button>
+      </form>
+    </div>
+
+    <!-- Blog Cards -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="results-container">
+      {% for blog in blogs %}
+        {% include 'partials/blog_card.html' %}
+      {% empty %}
+        <div class="col-span-full text-center text-gray-500 dark:text-gray-400">
+          No blogs found. Check back later!
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-container">
+      {% if blogs.has_previous %}
+        <a href="?q={{ query }}&category={{ category }}&page={{ blogs.previous_page_number }}" class="pagination-btn">Previous</a>
+      {% endif %}
+
+      <span class="pagination-info">{{ blogs.number }} / {{ blogs.paginator.num_pages }}</span>
+
+      {% if blogs.has_next %}
+        <a href="?q={{ query }}&category={{ category }}&page={{ blogs.next_page_number }}" class="pagination-btn">Next</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: #1f2937; /* Tailwind gray-800 */
+  color: #f3f4f6; /* Tailwind gray-100 */
+  border-color: #4b5563; /* Tailwind gray-600 */
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #6b7280; /* Tailwind gray-500 */
+}

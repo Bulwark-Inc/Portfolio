@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'home/css/services.css' %}">
+{% endblock %}
+
+{% block back_button_link %}"{% url 'home' %}"{% endblock %}
+{% block back_button_text %}Back Home{% endblock %}
+
+{% block content %}
+<div class="services-section px-4 md:px-8 lg:px-16 py-12">
+  <!-- Grid container with custom column fractions -->
+  <div class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-12 items-start">
+
+    <!-- Left Column: Title and Description (1fr) -->
+    <div class="flex flex-col justify-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-6">Our Services</h1>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+        Explore the services we offer, designed to solve your biggest challenges and deliver measurable results.
+      </p>
+      <a href="{% url 'contact' %}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition">
+        Contact Me
+      </a>
+    </div>
+
+    <!-- Right Column: Services Cards (3fr) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+      {% for service in services %}
+        {% include 'partials/_service_cards.html' %}
+      {% empty %}
+        <p>No services available at the moment.</p>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+{% endblock %}

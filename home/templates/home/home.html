@@ -1,16 +1,82 @@
-{% extends 'home/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block styles %}
-<link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/home-style.css' %}">
 {% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'home/js/home-scripts.js' %}" defer></script>
+{% endblock %}
+
+{% block hide_svg %}{% endblock %}
+{% block back_button_link %}"#"{% endblock %}
+{% block back_button_text %}{% endblock %}
+
 {% block content %}
-<section class="hero text-center py-20">
-    <h1 data-aos="fade-up" class="text-4xl font-bold">Hello, I’m Nonye Shiloh</h1>
-    <p data-aos="fade-up" data-aos-delay="200" class="mt-4 text-lg">I build scalable Django web apps.</p>
-    <img data-aos="zoom-in" data-aos-delay="400" src="{% static 'home/images/profile.png' %}" alt="Profile Picture" class="mx-auto w-40 rounded-full mt-8">
+  <!-- Hero Section -->
+  <section class="hero-section text-center py-20">
+    <h1 data-aos="fade-up" class="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-100">
+      Hello, I’m Nonye Shiloh
+    </h1>
+    <p data-aos="fade-up" data-aos-delay="200" class="text-base text-secondary dark:text-gray-400 mb-4">
+      I build scalable Django web apps.
+    </p>
+    <img data-aos="zoom-in" data-aos-delay="400"
+         src="{% static 'home/images/profile.png' %}"
+         alt="Profile Picture"
+         class="mx-auto w-40 rounded-full mt-8">
     <div class="mt-6 space-x-4">
-        <a href="https://github.com/Bulwark-Inc" class="btn btn-primary">GitHub</a>
-        <a href="https://linkedin.com/in/shiloh-egwuatu" class="btn btn-secondary">LinkedIn</a>
+      <a href="https://github.com/Bulwark-Inc" class="btn btn-primary">GitHub</a>
+      <a href="https://linkedin.com/in/shiloh-egwuatu" class="btn btn-secondary">LinkedIn</a>
     </div>
+    <a href="{% url 'contact' %}" class="mt-4 inline-block px-5 py-2 rounded-lg text-white bg-primary hover:bg-sky-600 transition duration-300">
+      Hire Me
+    </a>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="services-section py-12 dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 animate-fadeIn">
+      <a href="{% url 'services' %}" class="section-title text-center mb-8">
+        <h2 class="section-title text-center mb-8">My Services</h2>
+      </a>
+      <div class="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {% for service in services %}
+          {% include 'partials/_service_cards.html' %}
+        {% empty %}
+          <p>No services available at the moment.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section py-12 px-4 md:px-8 lg:px-16" data-aos="fade-up" data-aos-duration="800">
+    <div class="max-w-5xl mx-auto">
+      
+      <h2 class="section-title text-center mb-8">What Clients Say</h2>
+      
+      <div class="overflow-hidden relative">
+        <div id="testimonial-carousel" class="flex space-x-6 animate-scroll overflow-hidden">
+          
+          {% for testimonial in testimonials %}
+            {% include 'partials/_test_cards.html' %}
+          {% empty %}
+            <p class="col-span-3 text-center">No testimonials yet.</p>
+          {% endfor %}
+          
+          {% for testimonial in testimonials %}
+            {% include 'partials/_test_cards.html' %}
+          {% empty %}
+            <p class="col-span-3 text-center">No testimonials yet.</p>
+          {% endfor %}
+          
+        </div>
+      </div>
+      
+    </div>
+  </section>
+  
+
 {% endblock %}

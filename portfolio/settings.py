@@ -23,6 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure--r-6v00q-kec5sp&(6$j#w$$*155aw!8bp)xlz530(6=x_kl7$'
+OPENAI_API_KEY = config('OPENAI_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -53,6 +54,9 @@ INSTALLED_APPS = [
     'home',
     'tailwind',
     'theme',
+    'blogs',
+    'testimonials',
+    'chatbot',
     # Optional for live reload (dev only)
     'django_browser_reload',
 ]
@@ -73,7 +77,7 @@ ROOT_URLCONF = 'portfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,12 +134,32 @@ USE_I18N = True
 
 USE_TZ = True
 
+# ---------------------------
+# STATIC FILES (CSS, JS, Images)
+# ---------------------------
+STATIC_URL = "/static/"
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
+# Directory where collectstatic will gather static files for production
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / "theme" / "static"]
+# Directories where Django will look for static files in development
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # root
+    BASE_DIR / "theme" / "static",  # Tailwind CSS output and JS
+    BASE_DIR / "home" / "static",   # Custom CSS, images, and JS
+    BASE_DIR / "blogs" / "static",   # Custom CSS, images, and JS
+]
+
+# Default static files storage
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+
+# ---------------------------
+# MEDIA FILES (User Uploads)
+# ---------------------------
+MEDIA_URL = "/media/"
+
+# Directory where uploaded media files are stored
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

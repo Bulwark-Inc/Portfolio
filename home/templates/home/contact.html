@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="max-w-xl mx-auto p-4 mt-10">
+    <h1 class="text-3xl font-bold mb-4">Contact Me</h1>
+    <form method="POST" class="space-y-4">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        
+        <div>
+            {{ form.name.label_tag }}  
+            {{ form.name }}
+            {{ form.name.errors }}
+        </div>
+
+        <div>
+            {{ form.email.label_tag }}  
+            {{ form.email }}
+            {{ form.email.errors }}
+        </div>
+
+        <div>
+            {{ form.message.label_tag }}  
+            {{ form.message }}
+            {{ form.message.errors }}
+        </div>
+
+        <button type="submit"
+        class="mt-4 inline-block px-5 py-2 rounded-lg text-white bg-primary hover:bg-sky-600 transition duration-300">
+            Send Message
+        </button>
+    </form>
+
+    {% if messages %}
+        <ul class="mt-4">
+            {% for message in messages %}
+                <li class="text-green-500">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-extrabold text-gray-900 mb-8 text-center">What Clients Say</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for testimonial in testimonials %}
+            {% include 'partials/_test_cards.html' %}
+        {% empty %}
+        <p>No testimonials available yet.</p>
+        {% endfor %}
+    </div>
+</div>
+<a href="{% url 'submit_testimonial' %}"
+class="mt-4 px-5 py-2 span rounded-lg text-white bg-primary hover:bg-sky-600 transition duration-300">
+    Leave a testimonial
+</a>
+{% endblock %}

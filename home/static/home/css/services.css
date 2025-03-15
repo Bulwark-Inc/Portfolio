@@ -1,0 +1,86 @@
+/* Services Page */
+.services-section {
+    padding: 4rem 1rem;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 2rem;
+}
+
+/* Grid Layout for Services */
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  
+  
+
+/* Individual Service Card */
+.service-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Service Icon */
+.service-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1rem;
+}
+
+/* Service Title */
+.service-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+/* Service Description */
+.service-description {
+    font-size: 1rem;
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+}
+
+/* View Details Button */
+.service-btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #3182ce;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.service-btn:hover {
+    background-color: #2b6cb0;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+@media (min-width: 768px) {
+.services-grid {
+    grid-template-columns: 1fr 1fr;
+}
+}

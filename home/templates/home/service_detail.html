@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block back_button_link %}"{% url 'services' %}"{% endblock %}
+{% block back_button_text %}Back to services{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-12">
+  <!-- Service Title -->
+  <h1 class="text-4xl font-extrabold text-gray-800 mb-6 leading-tight ext-3xl dark:text-gray-100">
+    {{ service.title }}
+  </h1>
+
+  <!-- Optional Service Icon/Image (Large Banner Style) -->
+  {% if service.icon %}
+  <div class="mb-10">
+    <img src="{{ service.icon.url }}" alt="{{ service.title }}" class="w-full h-64 object-cover rounded-md shadow-sm">
+  </div>
+  {% endif %}
+
+  <!-- Service Description / Write-up -->
+  <div class="prose prose-lg prose-blue max-w-none text-gray-700 text-base text-secondary dark:text-gray-400 ">
+    {{ service.description|safe }}
+  </div>
+
+  <!-- Optional CTA (if you want it at the bottom) -->
+  <div class="mt-12 flex justify-start">
+    <a href="{% url 'contact' %}" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition">
+      Contact Me About This Service
+      <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
+    </a>
+  </div>
+
+</div>
+{% endblock %}

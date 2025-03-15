@@ -1,0 +1,33 @@
+<header class="p-4 bg-white shadow-md dark:bg-dark dark:shadow-lg fixed w-full z-50">
+    <nav aria-label="Primary Navigation" class="flex justify-between items-center max-w-7xl mx-auto">
+        <h1 class="text-xl font-bold">
+            <a href="{% url 'home' %}" class="hover:text-blue-500 transition-colors duration-200">MyPortfolio</a>
+        </h1>
+
+        <!-- Desktop Links -->
+        <ul class="hidden md:flex space-x-6 items-center">
+            <li><a href="{% url 'blogs' %}" class="hover:text-blue-500 transition">Latest</a></li>
+            <li><a href="{% url 'services' %}" class="hover:text-blue-500 transition">Services</a></li>
+            <li><a href="{% url 'projects' %}" class="hover:text-blue-500 transition">Projects</a></li>
+            <li><a href="{% url 'testimonials' %}" class="hover:text-blue-500 transition">Testimonials</a></li>
+            <li><a href="{% url 'contact' %}" class="hover:text-blue-500 transition">Contact</a></li>
+        </ul>
+
+        <!-- Mobile Menu Button -->
+        <button id="menuToggle" class="flex flex-col justify-center items-center w-8 h-8 focus:outline-none z-50 relative md:hidden group">
+            <span class="block w-8 h-1 bg-gray-800 dark:bg-gray-100 mb-1 transition-transform duration-300 origin-center transform group-[.open]:rotate-45 group-[.open]:translate-y-2"></span>
+            <span class="block w-8 h-1 bg-gray-800 dark:bg-gray-100 mb-1 transition-all duration-300 opacity-100 group-[.open]:opacity-0"></span>
+            <span class="block w-8 h-1 bg-gray-800 dark:bg-gray-100 transition-transform duration-300 origin-center transform group-[.open]:-rotate-45 group-[.open]:-translate-y-2"></span>
+        </button>
+
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden flex flex-col space-y-4 p-4 bg-white dark:bg-dark absolute top-full right-0 w-full shadow-md">
+        <a href="{% url 'blogs' %}" class="hover:text-blue-500 transition">Latest</a>
+        <a href="{% url 'services' %}" class="hover:text-blue-500 transition">Services</a>
+        <a href="{% url 'projects' %}" class="hover:text-blue-500 transition">Projects</a>
+        <a href="{% url 'testimonials' %}" class="hover:text-blue-500 transition">Testimonials</a>
+        <a href="{% url 'contact' %}" class="hover:text-blue-500 transition">Contact</a>
+    </div>
+</header>

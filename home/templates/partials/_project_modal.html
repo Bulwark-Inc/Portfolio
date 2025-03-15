@@ -1,0 +1,14 @@
+<div id="projectModal" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden pointer-events-none opacity-0 transition duration-300">
+  <div id="modalContent" class="bg-white dark:bg-gray-800 p-8 rounded-lg transform scale-95 transition duration-300 max-w-xl w-full relative">
+    <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 dark:hover:text-white transition">
+      &times;
+    </button>
+    <img id="modalImage" src="" alt="Project Image" class="w-full h-64 object-cover mb-4 rounded-lg">
+    <h3 id="modalTitle" class="text-2xl font-bold text-gray-800 dark:text-white mb-2"></h3>
+    <p id="modalDescription" class="text-gray-600 dark:text-gray-300 mb-4"></p>
+    <div class="flex space-x-4">
+      <a id="modalGithub" href="#" target="_blank" class="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800 transition hidden">GitHub</a>
+      <a id="modalLive" href="#" target="_blank" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition hidden">Live Demo</a>
+    </div>
+  </div>
+</div>

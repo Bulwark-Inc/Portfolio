@@ -14,7 +14,26 @@ module.exports = {
         '../../home/static/**/*.js',
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                primary: '#0ea5e9',    // sky-500
+                secondary: '#64748b',  // slate-500
+                accent: '#10b981',     // emerald-500
+                dark: '#0f172a',       // slate-900
+              },
+              fontFamily: {
+                sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+              },
+              keyframes: {
+                fadeIn: {
+                  '0%': { opacity: 0 },
+                  '100%': { opacity: 1 },
+                },
+              },
+              animation: {
+                fadeIn: 'fadeIn 1s ease-out',
+              },
+        },
     },
     plugins: [
         /**
