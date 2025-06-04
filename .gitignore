@@ -9,6 +9,8 @@ media/
 
 # SQLite database (local dev DB)
 db.sqlite3
+*.sqlite3
+*.db
 
 # Secrets
 .env
