@@ -55,6 +55,7 @@
         {% include 'components/_footer.html' %}
         {% include 'components/_chatbot.html' %}
 
+        <!-- External JS -->
         <script src="{% static 'home/js/aos.js' %}" defer></script>
         <script defer>
             document.addEventListener('DOMContentLoaded', () => {
@@ -66,10 +67,8 @@
             });
         </script>
         
-        <!-- External JS -->
-        <script src="{% static 'home/js/aos.js' %}" defer></script>
         <script src="{% static 'js/darkmode.js' %}" defer></script>
-        <script src="{% static 'js/menu.js' %}" defer></script>
+        <script src="{% static 'js/dist/main.js' %}" defer></script>
         <script src="{% static 'js/chatbot.js' %}" defer></script>
 
         {% block scripts %}{% endblock %}
