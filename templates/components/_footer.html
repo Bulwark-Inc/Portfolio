@@ -1,17 +1,26 @@
-<footer class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 py-8 mt-8" data-aos="fade-up">
+<footer class="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 py-8 mt-8" data-aos="fade-up">
   <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
     
     <div class="text-center md:text-left">
-      <p class="font-semibold">&copy; {{ now.year }} Nonye Shiloh. All rights reserved.</p>
+      <p class="font-semibold">&copy; {{ now.year }} NonWare. All rights reserved.</p>
       <p class="text-sm">Django • React • AI • Scalable Web Solutions</p>
     </div>
 
     <div class="flex space-x-4 mt-4 md:mt-0">
-      <a href="{% url 'contact' %}" class="hover:text-blue-500" title="Email"><i class="fas fa-envelope fa-lg"></i></a>
-      <a href="https://www.tiktok.com/@nonware5" class="hover:text-blue-500"><i class="fab fa-tiktok fa-lg"></i></a>
-      <a href="https://linkedin.com/in/shiloh-egwuatu" class="hover:text-blue-500" title="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
-      <a href="https://twitter.com/ShilohE_ai" class="hover:text-blue-500" title="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
-      <a href="https://github.com/Bulwark-Inc" class="hover:text-blue-500" title="GitHub"><i class="fab fa-github fa-lg"></i></a>
+      <a href="{% url 'contact' %}" class="hover:text-blue-500" title="Email"><i data-lucide="mail" class="w-6 h-6 stroke-current"></i></a>
+      <a href="https://www.tiktok.com/@nonware5" target="_blanck" class="hover:text-blue-500">
+        <i class="lucide lucide-tiktok">
+          <svg xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+              width="24" height="24"
+              fill="currentColor">
+            <path d="M448 209.9v125.1c-31.4 0-61.5-8.1-88-22.4v84.5c0 70.7-57.3 128-128 128s-128-57.3-128-128 57.3-128 128-128c8.6 0 17 .9 25 2.6v89.2c-7.6-2.1-15.6-3.2-24-3.2-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72v-276.4c20.5 15.2 45.6 24.4 72 25.2z"/>
+          </svg>
+        </i>
+      </a>
+      <a href="https://linkedin.com/in/shiloh-egwuatu" target="_blanck" class="hover:text-blue-500" title="LinkedIn"><i data-lucide="linkedin" class="w-6 h-6 stroke-current"></i></a>
+      <a href="https://x.com/Shiloheai" target="_blanck" class="hover:text-blue-500" title="Twitter"><i class="lucide lucide-x-unicode">𝕏</i></a>
+      <a href="https://github.com/Bulwark-Inc" target="_blanck" class="hover:text-blue-500" title="GitHub"><i data-lucide="github" class="w-6 h-6 stroke-current"></i></a>
     </div>
     
   </div>

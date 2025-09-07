@@ -1,15 +1,42 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block back_button_link %}"{% url 'testimonials' %}"{% endblock %}
+{% block title %}Submit Testimonial - NonWare{% endblock %}
+
+{% block back_button_link %}{% url 'testimonials' %}{% endblock %}
 {% block back_button_text %}Back to testimonials{% endblock %}
 
 {% block content %}
-<div class="max-w-xl mx-auto py-12 px-4">
-    <h2 class="text-3xl font-extrabold text-gray-900 mb-8 text-center">Leave a Testimonial</h2>
-    <form method="POST" enctype="multipart/form-data" class="space-y-4">
+<div class="max-w-xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-extrabold text-gray-900 dark:text-gray-100 mb-8 text-center">
+        Leave a Testimonial
+    </h2>
+
+    {% if messages %}
+        <ul class="mb-4">
+            {% for message in messages %}
+                <li {% if message.tags %} class="p-4 rounded-md mb-2 {% if message.tags == 'success' %}bg-green-100 text-green-700{% elif message.tags == 'error' %}bg-red-100 text-red-700{% endif %}"{% endif %}>
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data" class="space-y-6">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="px-4 py-2 bg-primary text-white rounded hover:bg-sky-600 transition">Submit</button>
+        <div class="space-y-4">
+            {% for field in form %}
+                <div>
+                    <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {{ field.label }}
+                    </label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn btn-primary w-full">
+            Submit Testimonial
+        </button>
     </form>
 </div>
 {% endblock %}

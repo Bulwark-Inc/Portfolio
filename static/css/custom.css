@@ -1,3 +1,7 @@
+html{
+  overflow-x: hidden;
+}
+
 .dark input,
 .dark textarea,
 .dark select {
@@ -9,4 +13,11 @@
 .dark input::placeholder,
 .dark textarea::placeholder {
   color: #6b7280; /* Tailwind gray-500 */
+}
+
+/* testimonial submit form */
+input[type="text"],
+input[type="email"],
+textarea {
+  @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white;
 }

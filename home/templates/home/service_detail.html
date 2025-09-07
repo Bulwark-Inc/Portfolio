@@ -1,37 +1,57 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block back_button_link %}"{% url 'services' %}"{% endblock %}
+{% block title %}Service - {{ service.title }}{% endblock %}
+
+{% block back_button_link %}{% url 'services' %}{% endblock %}
 {% block back_button_text %}Back to services{% endblock %}
 
 {% block content %}
-<div class="max-w-5xl mx-auto px-4 py-12">
-  <!-- Service Title -->
-  <h1 class="text-4xl font-extrabold text-gray-800 mb-6 leading-tight ext-3xl dark:text-gray-100">
-    {{ service.title }}
-  </h1>
+<div class="px-4 py-12 md:px-4 lg:px-8 max-w-8xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
 
-  <!-- Optional Service Icon/Image (Large Banner Style) -->
-  {% if service.icon %}
-  <div class="mb-10">
-    <img src="{{ service.icon.url }}" alt="{{ service.title }}" class="w-full h-64 object-cover rounded-md shadow-sm">
-  </div>
-  {% endif %}
+        <div class="md:col-span-2">
+            {% if service.icon %}
+            <div class="flex items-center text-blue-500 mb-6">
+                <i data-lucide="{{ service.icon }}" class="w-12 h-12" aria-hidden="true"></i>
+            </div>
+            {% endif %}
 
-  <!-- Service Description / Write-up -->
-  <div class="prose prose-lg prose-blue max-w-none text-gray-700 text-base text-secondary dark:text-gray-400 ">
-    {{ service.description|safe }}
-  </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 dark:text-gray-100 mb-6 leading-tight">
+                {{ service.title }}
+            </h1>
 
-  <!-- Optional CTA (if you want it at the bottom) -->
-  <div class="mt-12 flex justify-start">
-    <a href="{% url 'contact' %}" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition">
-      Contact Me About This Service
-      <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-      </svg>
-    </a>
-  </div>
+            <div class="prose prose-lg prose-blue max-w-none dark:prose-invert">
+                {{ service.description|safe }}
+            </div>
 
+            <div class="mt-12">
+                <a href="{% url 'contact' %}" class="inline-flex items-center gap-2 btn btn-primary">
+                    Contact Us About This Service
+                </a>
+            </div>
+        </div>
+
+        <div class="md:col-span-1">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">Other Services</h2>
+            <div class="grid grid-cols-1 gap-6">
+                {% for other_service in other_services %}
+                    <a href="{% url 'service_detail' other_service.slug %}" class="group block bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm transition-transform hover:scale-[1.02] focus:ring-2 focus:ring-blue-500">
+                        <div class="flex items-center mb-2 text-blue-500">
+                            <i data-lucide="{{ other_service.icon }}" class="w-6 h-6" aria-hidden="true"></i>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white ml-3 group-hover:underline">
+                                {{ other_service.title }}
+                            </h3>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                            {{ other_service.description|truncatewords:10 }}
+                        </p>
+                    </a>
+                {% empty %}
+                    <p class="text-sm text-gray-600 dark:text-gray-400">No other services available.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

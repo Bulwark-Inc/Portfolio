@@ -1,14 +1,24 @@
-<div id="projectModal" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden pointer-events-none opacity-0 transition duration-300">
-  <div id="modalContent" class="bg-white dark:bg-gray-800 p-8 rounded-lg transform scale-95 transition duration-300 max-w-xl w-full relative">
-    <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 dark:hover:text-white transition">
-      &times;
+<div id="projectModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300 opacity-0 pointer-events-none">
+    
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300"></div>
+
+  <div id="modalContent" class="relative bg-white dark:bg-gray-800 p-6 rounded-xl shadow-2xl max-w-xl w-full mx-auto transform scale-95 transition-all duration-300">
+      
+    <button data-modal-close class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition">
+        <i data-lucide="x" class="w-6 h-6"></i>
     </button>
-    <img id="modalImage" src="" alt="Project Image" class="w-full h-64 object-cover mb-4 rounded-lg">
-    <h3 id="modalTitle" class="text-2xl font-bold text-gray-800 dark:text-white mb-2"></h3>
-    <p id="modalDescription" class="text-gray-600 dark:text-gray-300 mb-4"></p>
-    <div class="flex space-x-4">
-      <a id="modalGithub" href="#" target="_blank" class="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800 transition hidden">GitHub</a>
-      <a id="modalLive" href="#" target="_blank" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition hidden">Live Demo</a>
+    
+    <img id="modalImage" src="" alt="Project Image" class="w-full h-auto object-cover mb-4 rounded-lg">
+    <h3 id="modalTitle" class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2"></h3>
+    <p id="modalDescription" class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed"></p>
+
+    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+        <a id="modalGithub" href="#" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition font-medium hidden">
+            <i data-lucide="github" class="w-5 h-5"></i> GitHub
+        </a>
+        <a id="modalLive" href="#" target="_blank" class="w-full sm:w-auto inline-flex justify-center items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium hidden">
+            <i data-lucide="monitor" class="w-5 h-5"></i> Live Demo
+        </a>
     </div>
   </div>
 </div>

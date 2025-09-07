@@ -1,82 +1,66 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block styles %}
-  <link rel="stylesheet" href="{% static 'blogs/css/blog_list.css' %}">
-{% endblock %}
-
-{% block scripts %}
-  <script src="{% static 'blogs/js/blog_list.js' %}"></script>
-{% endblock %}
+{% load humanize %}
 
 {% block content %}
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <!-- Page Title -->
+  <h1 class="text-3xl sm:text-4xl font-bold mb-8 text-center">Latest Blog Posts</h1>
 
-<!-- Blog Section -->
-<section class="blog-section">
-  <h2 class="section-title text-3xl font-bold mb-6 text-gray-800 dark:text-gray-100">Our Latest Blogs</h2>
+  <!-- Search & Filter Form -->
+  <form method="get" class="flex flex-wrap gap-4 items-center justify-center mb-10">
+    <input type="text" name="q" value="{{ query|default:'' }}" placeholder="Search blogs..."
+           class="w-full sm:w-64 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
 
-    <!-- Search Bar -->
-    <div class="mb-12 flex justify-center">
-      <form method="get" action="{% url 'blogs' %}" class="search-form">
-        <input
-          type="text"
-          name="q"
-          value="{{ query|default:'' }}"
-          placeholder="Search blogs..."
-          class="search-input"
-        />
-        <button type="submit" class="search-button">
-          <svg class="icon-search" viewBox="0 0 24 24">
-            <path d="M21 21l-4.35-4.35M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z" />
-          </svg>
-        </button>
-      </form>
-    </div>
-
-    <!-- Filter by Category -->
-    <div class="mb-8 flex justify-center">
-      <form method="get" action="{% url 'blogs' %}" class="filter-form">
-        <!-- Category Dropdown -->
-        <div class="category-dropdown-wrapper">
-          <select name="category" onchange="this.form.submit()" class="category-select">
-            <option value="">All Categories</option>
-            {% for cat in categories %}
-              <option value="{{ cat }}" {% if cat == category %}selected{% endif %}>{{ cat }}</option>
-            {% endfor %}
-          </select>
-    </div>        
-        
-        <!-- Submit Button -->
-        <button type="submit" class="filter-btn">
-          Filter
-        </button>
-      </form>
-    </div>
-
-    <!-- Blog Cards -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="results-container">
-      {% for blog in blogs %}
-        {% include 'partials/blog_card.html' %}
-      {% empty %}
-        <div class="col-span-full text-center text-gray-500 dark:text-gray-400">
-          No blogs found. Check back later!
-        </div>
+    <select name="category"
+            class="w-full sm:w-48 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <option value="">All Categories</option>
+      {% for cat in categories %}
+        <option value="{{ cat }}" {% if cat == category %}selected{% endif %}>{{ cat }}</option>
       {% endfor %}
-    </div>
+    </select>
 
-    <!-- Pagination -->
-    <div class="pagination-container">
+    <button type="submit"
+            class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+      Filter
+    </button>
+  </form>
+
+  <!-- Blog Grid -->
+  <div id="blog-grid" class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    {% for blog in blogs %}
+      {% include 'partials/blog_card.html' %}
+    {% empty %}
+      <p class="text-center col-span-full text-gray-500">No blogs found.</p>
+    {% endfor %}
+  </div>
+
+  <!-- Pagination -->
+  {% if blogs.has_other_pages %}
+    <div class="flex justify-center items-center space-x-2 mt-12">
       {% if blogs.has_previous %}
-        <a href="?q={{ query }}&category={{ category }}&page={{ blogs.previous_page_number }}" class="pagination-btn">Previous</a>
+        <a href="?{% if query %}q={{ query }}&{% endif %}{% if category %}category={{ category }}&{% endif %}page={{ blogs.previous_page_number }}"
+           class="px-4 py-2 border rounded hover:bg-gray-100">
+          Previous
+        </a>
       {% endif %}
 
-      <span class="pagination-info">{{ blogs.number }} / {{ blogs.paginator.num_pages }}</span>
+      {% for num in blogs.paginator.page_range %}
+        {% if blogs.number == num %}
+          <span class="px-4 py-2 border rounded bg-blue-600 text-white">{{ num }}</span>
+        {% elif num >= blogs.number|add:"-2" and num <= blogs.number|add:"2" %}
+          <a href="?{% if query %}q={{ query }}&{% endif %}{% if category %}category={{ category }}&{% endif %}page={{ num }}"
+             class="px-4 py-2 border rounded hover:bg-gray-100">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
 
       {% if blogs.has_next %}
-        <a href="?q={{ query }}&category={{ category }}&page={{ blogs.next_page_number }}" class="pagination-btn">Next</a>
+        <a href="?{% if query %}q={{ query }}&{% endif %}{% if category %}category={{ category }}&{% endif %}page={{ blogs.next_page_number }}"
+           class="px-4 py-2 border rounded hover:bg-gray-100">
+          Next
+        </a>
       {% endif %}
     </div>
-  </div>
+  {% endif %}
 </section>
-
 {% endblock %}

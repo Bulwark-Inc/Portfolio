@@ -1,113 +1,23 @@
-/* Hero Section */
-.hero-section {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-}
-
-.hero-section h1 {
-  color: #1F2937; /* Tailwind gray-800 */
-}
-
-.hero-section p {
-  color: #6B7280; /* Tailwind gray-400 */
-}
-
-/* Services Section */
-.services-section {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-.service-card:hover {
-  transform: scale(1.05);
-}
-
-/* Testimonials Section */
-.testimonials-section {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-/* Section Titles */
-.section-title {
-  font-size: 1.875rem;
-  font-weight: 700;
-  color: #1F2937; /* gray-800 */
-}
-
-.dark .section-title {
-  color: #ffffff;
-}
-
-/* Buttons */
-.btn {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  transition: background-color 0.3s;
-}
-
-.btn-primary {
-  background-color: #0EA5E9; /* sky-500 */
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: #0284C7; /* sky-600 */
-}
-
-.btn-secondary {
-  background-color: #64748B; /* gray-500 */
-  color: white;
-}
-
-.btn-secondary:hover {
-  background-color: #475569; /* gray-600 */
-}
-
-/* Scroll Animation */
 @keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); } /* Half because we duplicate items */
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-scroll {
   display: flex;
-  width: max-content;
-  animation: scroll 30s linear infinite; /* Adjust speed here */
+  animation: scroll 40s linear infinite;
 }
 
 #testimonial-carousel:hover {
   animation-play-state: paused;
 }
 
-/* ✅ Moved hero-banner background styles from inline */
-.hero-banner {
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-}
-
-@media (max-width: 768px) {
-  .hero-banner {
-    background-size: cover !important;
-    background-position: center top !important;
-    background-attachment: scroll !important;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .hero-banner {
-    background-size: cover !important;
-    background-position: center center !important;
-  }
-}
-
-@media (min-width: 1025px) {
-  .hero-banner {
-    background-size: cover !important;
-    background-position: center center !important;
-    background-attachment: fixed !important;
-  }
+/* Responsive testimonial card sizing fallback if Tailwind is missing something */
+.testimonial-card {
+  min-width: 280px;
+  max-width: 400px;
 }

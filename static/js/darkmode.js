@@ -1,13 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const darkToggleBtn = document.getElementById('darkToggleBtn');
+    const darkModeIcon = document.getElementById('darkModeIcon');
     const htmlElement = document.documentElement;
 
-    // Check saved preference
-    if (localStorage.getItem('theme') === 'dark') {
-        htmlElement.classList.add('dark');
-        darkToggleBtn.setAttribute('aria-pressed', true);
-        darkToggleBtn.innerHTML = '☀️';
-    }
+    // Set initial icon based on theme
+    const isDark = htmlElement.classList.contains('dark');
+    darkModeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+    darkToggleBtn.setAttribute('aria-pressed', isDark);
 
     darkToggleBtn.addEventListener('click', toggleDarkMode);
 
@@ -21,7 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             darkToggleBtn.setAttribute('aria-pressed', isDark);
-            darkToggleBtn.innerHTML = isDark ? '☀️' : '🌙';
+
+            // Change the icon and re-render
+            darkModeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'sun');
 
             document.body.style.opacity = '1';
         }, 200);

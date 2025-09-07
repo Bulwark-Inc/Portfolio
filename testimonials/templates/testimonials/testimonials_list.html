@@ -1,19 +1,29 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Testimonials - NonWare{% endblock %}
 
 {% block content %}
-<div class="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-extrabold text-gray-900 mb-8 text-center">What Clients Say</h2>
+<div class="py-12 px-4 md:px-8 max-w-7xl mx-auto">
+    <h2 class="text-4xl font-bold text-center text-gray-800 dark:text-gray-100 mb-10">
+        What Clients Say
+    </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {% for testimonial in testimonials %}
             {% include 'partials/_test_cards.html' %}
         {% empty %}
-        <p>No testimonials available yet.</p>
+            <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center text-gray-600 dark:text-gray-400">
+                <p>No testimonials available yet. Be the first to leave one!</p>
+            </div>
         {% endfor %}
     </div>
+
+    <div class="mt-12 text-center">
+        <a href="{% url 'submit_testimonial' %}" class="btn btn-primary inline-flex items-center gap-2">
+            Leave a testimonial
+            <i data-lucide="edit" class="w-5 h-5"></i>
+        </a>
+    </div>
 </div>
-<a href="{% url 'submit_testimonial' %}"
-class="mt-4 px-5 py-2 span rounded-lg text-white bg-primary hover:bg-sky-600 transition duration-300">
-    Leave a testimonial
-</a>
 {% endblock %}

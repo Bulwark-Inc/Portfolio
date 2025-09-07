@@ -1,46 +1,59 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Projects - NonWare{% endblock %}
+
 {% block styles %}
-  <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
-  <link rel="stylesheet" href="{% static 'home/css/projects.css' %}">
+<link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
 {% endblock %}
 
 {% block scripts %}
-  <script src="{% static 'home/js/aos.js' %}"></script>
-  <script src="{% static 'home/js/projects.js' %}"></script>
-  <script>
-    AOS.init({
-      duration: 800,
-      once: true,
-      easing: 'ease-in-out',
-    });
-  </script>
+<script src="{% static 'home/js/projects.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
+<section id="projects" class="py-12 transition-colors duration-500">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center text-gray-800 dark:text-gray-100 mb-10" data-aos="fade-down"
+      data-aos-delay="100">Our Current Projects</h2>
 
-  <section id="projects" class="py-12 dark:bg-gray-900 transition-colors duration-500">
-    <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-bold text-center text-gray-800 dark:text-gray-100 mb-10" data-aos="fade-down" data-aos-delay="100">My Projects</h2>
-
-      <!-- Filter Buttons -->
-      <div class="flex justify-center space-x-4 mb-10" data-aos="fade-up" data-aos-delay="200">
-        <button onclick="filterProjects('all')" class="filter-btn">All</button>
-        <button onclick="filterProjects('web')" class="filter-btn">Web</button>
-        <button onclick="filterProjects('mobile')" class="filter-btn">Mobile</button>
-      </div>
-
-      <!-- Project Grid -->
-      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {% for project in projects %}
-          {% include 'partials/_project_card.html' %}
-        {% empty %}
-          <p class="col-span-3 text-center">No projects available.</p>
-        {% endfor %}
-      </div>
+    <div class="flex flex-wrap justify-center gap-4 mb-10" data-aos="fade-up" data-aos-delay="200">
+      <button data-filter="all"
+        class="px-6 py-2 rounded-full font-medium transition-all duration-300
+        text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600
+        focus:outline-none focus:ring-2 focus:ring-blue-500
+        active-filter">
+        All
+      </button>
+      <button data-filter="web"
+        class="px-6 py-2 rounded-full font-medium transition-all duration-300
+        text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600
+        focus:outline-none focus:ring-2 focus:ring-blue-500">
+        Web
+      </button>
+      <button data-filter="mobile"
+        class="px-6 py-2 rounded-full font-medium transition-all duration-300
+        text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600
+        focus:outline-none focus:ring-2 focus:ring-blue-500">
+        Mobile
+      </button>
+      <button data-filter="ai"
+        class="px-6 py-2 rounded-full font-medium transition-all duration-300
+        text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600
+        focus:outline-none focus:ring-2 focus:ring-blue-500">
+        AI / Machine Learning
+      </button>
     </div>
-  </section>
 
-  {% include 'partials/_project_modal.html' %}
+    <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% for project in projects %}
+        {% include 'partials/_project_card.html' %}
+      {% empty %}
+        <p class="col-span-3 text-center">No projects available.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include 'partials/_project_modal.html' %}
 {% endblock %}

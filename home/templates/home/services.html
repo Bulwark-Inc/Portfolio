@@ -1,38 +1,46 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Services - NonWare{% endblock %}
+
 {% block styles %}
 <link rel="stylesheet" href="{% static 'home/css/services.css' %}">
 {% endblock %}
 
-{% block back_button_link %}"{% url 'home' %}"{% endblock %}
-{% block back_button_text %}Back Home{% endblock %}
+{% block back_button_link %}{% url 'home' %}{% endblock %}
 
 {% block content %}
-<div class="services-section px-4 md:px-8 lg:px-16 py-12">
-  <!-- Grid container with custom column fractions -->
-  <div class="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-12 items-start">
+<section class="services-section px-2 md:px-6 lg:px-14 py-14">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 items-start">
 
-    <!-- Left Column: Title and Description (1fr) -->
-    <div class="flex flex-col justify-center">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-6">Our Services</h1>
-      <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-        Explore the services we offer, designed to solve your biggest challenges and deliver measurable results.
-      </p>
-      <a href="{% url 'contact' %}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition">
-        Contact Me
-      </a>
+    <!-- Services Grid (takes priority on mobile) -->
+    <div class="order-2 md:order-2 md:col-span-3">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        {% for service in services %}
+          {% include 'partials/_service_cards.html' with delay=forloop.counter0 %}
+        {% empty %}
+          <p class="text-gray-500 dark:text-gray-400 col-span-full text-center">
+            No services available at the moment.
+          </p>
+        {% endfor %}
+      </div>
     </div>
 
-    <!-- Right Column: Services Cards (3fr) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-      {% for service in services %}
-        {% include 'partials/_service_cards.html' %}
-      {% empty %}
-        <p>No services available at the moment.</p>
-      {% endfor %}
+    <!-- Intro Content (comes last on mobile, first on larger screens) -->
+    <div class="order-1 md:order-1 md:col-span-1 flex flex-col justify-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+        Our Services
+      </h1>
+      <p class="text-base md:text-lg text-gray-600 dark:text-gray-300 mb-8">
+        Explore the services we offer, designed to solve your biggest challenges and deliver measurable results.
+      </p>
+      <div class="flex justify-center w-full">
+        <a href="{% url 'contact' %}" class="btn btn-primary w-full max-w-sm mt-6 md:max-w-md lg:max-w-xl md:mx-6 lg:mx-12">
+          Contact Us
+        </a>
+      </div>
     </div>
 
   </div>
-</div>
+</section>
 {% endblock %}
