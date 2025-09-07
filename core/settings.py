@@ -14,7 +14,12 @@ SECRET_KEY = env('SECRET_KEY', default='your-default-secret-key')
 DEBUG = env('DEBUG', default=True, cast=bool)
 OPENAI_API_KEY = env('OPENAI_API_KEY')
 
-ALLOWED_HOSTS = []
+if DEBUG:
+    ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = ['shilohe.pythonanywhere.com']
+
+
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
