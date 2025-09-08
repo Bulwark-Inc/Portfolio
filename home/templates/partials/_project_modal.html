@@ -8,7 +8,13 @@
         <i data-lucide="x" class="w-6 h-6"></i>
     </button>
     
-    <img id="modalImage" src="" alt="Project Image" class="w-full h-auto object-cover mb-4 rounded-lg">
+    {% if project.image %}
+      <img id="modalImage" src="{{ project.image.url }}" alt="{{ project.name }}" class="w-full h-auto object-cover mb-4 rounded-lg">
+    {% else %}
+      <!-- Optionally display a placeholder -->
+      <img id="modalImage" src="" alt="No image available" class="w-full h-auto object-cover mb-4 rounded-lg">
+    {% endif %}
+
     <h3 id="modalTitle" class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2"></h3>
     <p id="modalDescription" class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed"></p>
 
