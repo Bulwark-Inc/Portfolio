@@ -13,13 +13,14 @@ __pycache__/
 db.sqlite3
 media/
 instance/
-staticfiles/  # collectstatic output (regenerated on server)
+staticfiles/
 
 # Environment variables & virtualenv
 .env
 .env.*
 venv/
 env/
+penv/
 
 # Node.js
 **/node_modules/
