@@ -14,6 +14,19 @@ from home.models import DailyHeroText, Project, Service
 from testimonials.models import Testimonial
 from blogs.models import Blog, Category
 
+
+def download_image_from_url(url, name_prefix):
+    if url and url.startswith('http'):
+        try:
+            response = requests.get(url, timeout=5)
+            if response.status_code == 200:
+                filename = slugify(name_prefix) + '.jpg'
+                return ContentFile(response.content, name=filename)
+        except requests.RequestException as e:
+            print(f"Failed to download image from {url}: {e}")
+    return None
+
+
 # ----- DailyHeroText Entries -----
 DAILY_ENTRIES = [
     {
@@ -218,44 +231,58 @@ def populate_daily_hero_text():
 def populate_projects():
     print("Populating Projects...")
     Project.objects.all().delete()
+
     for entry in PROJECT_ENTRIES:
+        image_file = download_image_from_url(entry['image'], entry['title'])
+
         Project.objects.create(
             title=entry['title'],
             description=entry['description'],
-            image=entry['image'],  # Ensure image path exists or use a placeholder
+            image=image_file,
             github_link=entry['github_link'],
             live_demo_link=entry['live_demo_link'],
             category=entry['category']
         )
         print(f"Created Project: {entry['title']}")
+
     print("Done.\n")
+
 
 def populate_services():
     print("Populating Services...")
     Service.objects.all().delete()
+
     for entry in SERVICE_ENTRIES:
+        # Try downloading if it's a URL
+        icon_file = download_image_from_url(entry['icon'], entry['title'])
+
         Service.objects.create(
             title=entry['title'],
             slug=slugify(entry['title']),
             description=entry['description'],
-            icon=entry['icon'],
+            icon=icon_file or entry['icon'],  # fallback to raw string if not an image
             link=entry['link']
         )
         print(f"Created Service: {entry['title']}")
+
     print("Done.\n")
 
 def populate_testimonials():
     print("Populating Testimonials...")
     Testimonial.objects.all().delete()
+
     for entry in TESTIMONIAL_ENTRIES:
+        photo_file = download_image_from_url(entry['photo'], entry['name'])
+
         Testimonial.objects.create(
             name=entry['name'],
             designation=entry['designation'],
             message=entry['message'],
-            photo=entry['photo'],  # Ensure placeholder images exist or use blank if testing
+            photo=photo_file,
             is_approved=entry['is_approved']
         )
         print(f"Created Testimonial: {entry['name']}")
+
     print("Done.\n")
 
 def populate_blogs():
@@ -263,26 +290,20 @@ def populate_blogs():
     Blog.objects.all().delete()
 
     for entry in BLOG_ENTRIES:
-        # Get or create category
         category, _ = Category.objects.get_or_create(name=entry['category_name'])
 
-        # Download image if using external URL
-        image_file = None
-        if entry['image'].startswith('http'):
-            response = requests.get(entry['image'])
-            if response.status_code == 200:
-                image_name = slugify(entry['title']) + '.jpg'
-                image_file = ContentFile(response.content, name=image_name)
+        image_file = download_image_from_url(entry['image'], entry['title'])
 
         blog = Blog.objects.create(
             title=entry['title'],
             content=entry['content'],
-            image=image_file,  # will be None if download failed
+            image=image_file,
             category=category
         )
         print(f"Created Blog: {blog.title}")
 
     print("Done.\n")
+
 
 # ----- CLI Prompt -----
 def run():
