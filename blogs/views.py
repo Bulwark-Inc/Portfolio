@@ -32,7 +32,7 @@ def blog_list(request):
     page_obj = paginator.get_page(page_number)
 
     # Category dropdown
-    categories = Blog.objects.values_list('category', flat=True).distinct().exclude(category__isnull=True).exclude(category__exact='')
+    categories = Blog.objects.values_list('category', flat=True).distinct().exclude(category__isnull=True)
 
     # AJAX response
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
