@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     
     # third-party apps...
+    'widget_tweaks',
     'django_recaptcha',
     'tailwind',
     
