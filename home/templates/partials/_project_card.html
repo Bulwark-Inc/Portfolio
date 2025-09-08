@@ -2,7 +2,7 @@
   data-aos="fade-up" data-aos-delay="{% if forloop.counter0 < 3 %}{{ forloop.counter0|add:1|stringformat:"d" }}00{% else %}300{% endif %}"
   data-title="{{ project.title }}"
   data-description="{{ project.description|escapejs }}"
-  data-image-url="{{ project.image.url }}"
+  data-image-url="{% if project.image %}{{ project.image.url }}{% else %}https://via.placeholder.com/400x256?text=No+Image{% endif %}"
   data-github-link="{{ project.github_link }}"
   data-live-demo-link="{{ project.live_demo_link }}"
   data-category="{{ project.category }}"
@@ -12,7 +12,7 @@
     <img src="{{ project.image.url }}" alt="{{ project.name }}"
     class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" />
   {% else %}
-      <img src="" alt="No image available"
+      <img src="https://via.placeholder.com/400x256?text=No+Image" alt="No image available"
       class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" />
   {% endif %}
 
