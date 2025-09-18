@@ -119,8 +119,8 @@ EMAIL_HOST = env('EMAIL_HOST', default='smtp.gmail.com')
 EMAIL_PORT = env('EMAIL_PORT', cast=int)
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-EMAIL_USE_SSL = env('EMAIL_USE_SSL', default=True, cast=bool)
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@medinn.com')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS', default=True, cast=bool)
+DEFAULT_FROM_EMAIL ='<noreply@medinn.com>'
 
 # reCAPTCHA SETTINGS
 RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC_KEY')
